@@ -9,15 +9,15 @@ var bodyParser = require("body-parser");
 var indexRouter = require('./routes/index');
 
 //new
-var Pusher = require("pusher");
+// var Pusher = require("pusher");
 
-var pusher = new Pusher({
-  appId: "618134",
-  key: "d99dca5d5ba5eddba9a2",
-  secret: "a36aaf13c2e3004012a4",
-  cluster: "ap2",
-  encrypted: true
-});
+// var pusher = new Pusher({
+//   appId: "618134",
+//   key: "d99dca5d5ba5eddba9a2",
+//   secret: "a36aaf13c2e3004012a4",
+//   cluster: "ap2",
+//   encrypted: true
+// });
 //
 
 var app = express();
@@ -38,58 +38,58 @@ app.use('/', indexRouter);
 
 
 //new2
-var londonTempData = {
-  city: "London",
-  unit: "celsius",
-  dataPoints: [
-    {
-      time: 1130,
-      temperature: 12
-    },
-    {
-      time: 1200,
-      temperature: 13
-    },
-    {
-      time: 1230,
-      temperature: 15
-    },
-    {
-      time: 1300,
-      temperature: 14
-    },
-    {
-      time: 1330,
-      temperature: 15
-    }
-  ]
-};
+// var londonTempData = {
+//   city: "London",
+//   unit: "celsius",
+//   dataPoints: [
+//     {
+//       time: 1130,
+//       temperature: 12
+//     },
+//     {
+//       time: 1200,
+//       temperature: 13
+//     },
+//     {
+//       time: 1230,
+//       temperature: 15
+//     },
+//     {
+//       time: 1300,
+//       temperature: 14
+//     },
+//     {
+//       time: 1330,
+//       temperature: 15
+//     }
+//   ]
+// };
 
-app.get("/getTemperature", function(req, res) {
-  res.send(londonTempData);
-});
+// app.get("/getTemperature", function(req, res) {
+//   res.send(londonTempData);
+// });
 
-app.get("/addTemperature", function(req, res) {
-  var temp = parseInt(req.query.temperature);
-  var time = parseInt(req.query.time);
-  if (temp && time && !isNaN(temp) && !isNaN(time)) {
-    var newDataPoint = {
-      temperature: temp,
-      time: time
-    };
-    londonTempData.dataPoints.push(newDataPoint);
-    pusher.trigger("london-temp-chart", "new-temperature", {
-      dataPoint: newDataPoint
-    });
-    res.send({ success: true });
-  } else {
-    res.send({
-      success: false,
-      errorMessage: "Invalid Query Paramaters, required - temperature & time."
-    });
-  }
-});
-//2end
+// app.get("/addTemperature", function(req, res) {
+//   var temp = parseInt(req.query.temperature);
+//   var time = parseInt(req.query.time);
+//   if (temp && time && !isNaN(temp) && !isNaN(time)) {
+//     var newDataPoint = {
+//       temperature: temp,
+//       time: time
+//     };
+//     londonTempData.dataPoints.push(newDataPoint);
+//     pusher.trigger("london-temp-chart", "new-temperature", {
+//       dataPoint: newDataPoint
+//     });
+//     res.send({ success: true });
+//   } else {
+//     res.send({
+//       success: false,
+//       errorMessage: "Invalid Query Paramaters, required - temperature & time."
+//     });
+//   }
+// });
+// //2end
 
 
 // catch 404 and forward to error handler
@@ -109,3 +109,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+app.listen(()=>{
+  console.log("server is running at 3000");
+})

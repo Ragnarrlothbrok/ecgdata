@@ -130,11 +130,22 @@ p {
   margin:auto;
 }
 .btemp{
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  
+}
+.location{
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
-  
+  border-radius:50%;
+}
+.location #map{
+  height:100%;
+  width:100%;
 }
 
 .btemp_card {
@@ -219,7 +230,7 @@ p {
 
 .img_slider{
   grid-column-start: 2;
-  grid-column-end: 4;
+  grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
   background-color:yellow;

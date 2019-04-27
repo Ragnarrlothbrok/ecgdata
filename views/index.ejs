@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>HealthView
+    </title>
     <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzqceCICoRE9b4Usp4UTbDKV6ntpHxAVg&libraries=places&callback=initMap"></script>
+  <!-- <script src="/javascripts/googlemaps.js"> -->
+  </script>
   </head>
   <body>
    <nav>
@@ -32,7 +40,8 @@
     </div>
     </div>
     <div class="btemp">
-      <div class="btemp_card">
+      <canvas id="anChart"></canvas>
+      <!-- <div class="btemp_card">
         <ul class="list">
        
             <div class="heart"></div>
@@ -40,7 +49,10 @@
           <img class="thermo "src="/images/thermometer.png" alt="thermo">
           <li class="list_item2">&nbsp;&nbsp;&nbsp;98.7 Fahrenheit</li>
         </ul>
-      </div>
+      </div> -->
+    </div>
+    <div class="location">
+    <div id='map'></div>
     </div>
     <div class="img_slider">
         <div class="container">
@@ -74,16 +86,72 @@
           </div>
     </div>
   <div class="graph">
-      <div id="loader" class="loader">
-      </div>
-      <canvas id="weatherChart">
+      <!-- <div id="loader" class="loader">
+      </div> -->
+      <canvas id="myChart">
 
       </canvas>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+
   <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
   <script type="text/javascript" src="/javascripts/app2.js"></script>
+  <script>
+    
+  var t="cdddfdfdc"
+  display(t)
+  function display(d){
+ 
+    initMap();
+    function initMap() {
+    //options 
+    var options={
+        zoom:15,
+        center:{lat:28.629 , lng:77.372}
+    }
+    console.log("--------------------"+d);
+    //map
+    var map=new google.maps.Map(document.getElementById('map'),options);
+        google.maps.event.addListener(map,'click',
+        function(event){
+            addMarker({coords:event.LatLng})
+        });
+
+      
+      var props={
+        "coords":{
+          "lat":28.62941543418492,
+          "lng":77.37156892728802
+        },
+        "meassage":"Apoorv"
+      }
+      addMarker(props);
+      function addMarker(props){
+        console.log(props.meassage);
+        var marker=new google.maps.Marker({
+            position: new google.maps.LatLng(props.coords.lat, props.coords.lng),
+            map:map
+        });
+        if(props.iconImage){
+            marker.setIcon(props.iconImage);
+        }
+        if(props.message){
+            var infoWindow=new google.maps.InfoWindow({
+                content:props.message
+            })
+            marker.addListener('click',function(){
+                infoWindow.open(map,marker);
+                console.log(props.id);
+
+            })
+        }
+    }
+  }
+      
+    
+    }
+  </script>
 
   </body>
 </html>
